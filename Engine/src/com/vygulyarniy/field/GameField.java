@@ -48,18 +48,22 @@ public class GameField {
     cells = new GameCell[horizontalCells][verticalCells];
     for (int verticalIndex = 0; verticalIndex < verticalCells; verticalIndex++) {
       for (int horizontalIndex = 0; horizontalIndex < horizontalCells; horizontalIndex++) {
-        int topX = cellSize * horizontalIndex;
-        int topY = cellSize * verticalIndex;
-        int bottomX = cellSize * (horizontalIndex + 1);
-        int bottomY = cellSize * (verticalIndex + 1);
-        bottomX = bottomX >= bottomRight.getX() ? bottomRight.getX() : bottomX;
-        bottomY = bottomY >= bottomRight.getY() ? bottomRight.getY() : bottomY;
-        Point fromPoint = new Point(topX, topY);
-        Point toPoint = new Point(bottomX - 1, bottomY - 1);
-        GameCell cell = new GameCell(fromPoint, toPoint);
-        cells[horizontalIndex][verticalIndex] = cell;
+        createCell(horizontalIndex, verticalIndex);
       }
     }
+  }
+
+  private void createCell(final int horizontalIndex, final int verticalIndex) {
+    int topX = cellSize * horizontalIndex;
+    int topY = cellSize * verticalIndex;
+    int bottomX = cellSize * (horizontalIndex + 1);
+    int bottomY = cellSize * (verticalIndex + 1);
+    bottomX = bottomX >= bottomRight.getX() ? bottomRight.getX() : bottomX;
+    bottomY = bottomY >= bottomRight.getY() ? bottomRight.getY() : bottomY;
+    Point fromPoint = new Point(topX, topY);
+    Point toPoint = new Point(bottomX - 1, bottomY - 1);
+    GameCell cell = new GameCell(fromPoint, toPoint);
+    cells[horizontalIndex][verticalIndex] = cell;
   }
 
   public int getFieldWidth() {
