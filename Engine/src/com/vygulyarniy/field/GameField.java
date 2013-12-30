@@ -8,7 +8,7 @@ import com.vygulyarniy.beans.Point;
  */
 public class GameField {
   GameCell[][] cells;
-  private Point topLeft = new Point(0,0);
+  private Point topLeft = new Point(0, 0);
   private Point bottomRight;
   private int cellSize;
   private static final int DEFAULT_CELL_SIZE = 1000;
@@ -23,7 +23,6 @@ public class GameField {
     this(new Point(width, height), cellSize);
   }
 
-
   public GameField(final Point bottomRight) {
     this(bottomRight, DEFAULT_CELL_SIZE);
   }
@@ -35,16 +34,28 @@ public class GameField {
   private void initCells() {
     int horizontalCells = Math.abs(getFieldWidth() / cellSize);
     int verticalCells = Math.abs(getFieldHeight() / cellSize);
-    System.out.println("Field: " +horizontalCells + "x" + verticalCells);
+
+    if (getFieldWidth() % cellSize != 0) {
+      horizontalCells++;
+    }
+    if (getFieldHeight() % cellSize != 0) {
+      verticalCells++;
+    }
+    createCells(horizontalCells, verticalCells);
+  }
+
+  private void createCells(final int horizontalCells, final int verticalCells) {
     cells = new GameCell[horizontalCells][verticalCells];
-    for(int verticalIndex = 0; verticalIndex < verticalCells; verticalIndex++) {
-      for(int horizontalIndex = 0; horizontalIndex < horizontalCells; horizontalIndex++) {
-        int topX = cellSize* horizontalIndex;
+    for (int verticalIndex = 0; verticalIndex < verticalCells; verticalIndex++) {
+      for (int horizontalIndex = 0; horizontalIndex < horizontalCells; horizontalIndex++) {
+        int topX = cellSize * horizontalIndex;
         int topY = cellSize * verticalIndex;
         int bottomX = cellSize * (horizontalIndex + 1);
         int bottomY = cellSize * (verticalIndex + 1);
+        bottomX = bottomX >= bottomRight.getX() ? bottomRight.getX() : bottomX;
+        bottomY = bottomY >= bottomRight.getY() ? bottomRight.getY() : bottomY;
         Point fromPoint = new Point(topX, topY);
-        Point toPoint = new Point(bottomX, bottomY);
+        Point toPoint = new Point(bottomX - 1, bottomY - 1);
         GameCell cell = new GameCell(fromPoint, toPoint);
         cells[horizontalIndex][verticalIndex] = cell;
       }

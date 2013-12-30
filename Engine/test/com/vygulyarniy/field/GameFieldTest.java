@@ -22,15 +22,15 @@ public class GameFieldTest {
 
   @Test
   public void testRectangleGameFieldCreation() {
-    GameField field = new GameField(150, 50, 10);
+    GameField field = new GameField(154, 53, 10);
     assertNotNull("Cells are not created", field.cells);
-    assertEquals("Horizontal cells are not correct", 15, field.cells.length);
-    assertEquals("Vertical cells are not correct", 5, field.cells[0].length);
+    assertEquals("Horizontal cells are not correct", 16, field.cells.length);
+    assertEquals("Vertical cells are not correct", 6, field.cells[0].length);
   }
 
   @Test
   public void testSingleCellFieldCreation() {
-    GameField field = new GameField(100, 100, 1000);
+    GameField field = new GameField(100, 53, 500);
     assertNotNull("Cells are not created", field.cells);
     assertEquals("Horizontal cells are not correct", 1, field.cells.length);
     assertEquals("Vertical cells are not correct", 1, field.cells[0].length);
