@@ -8,10 +8,10 @@ import com.vygulyarniy.beans.Point;
  */
 public class GameField {
   GameCell[][] cells;
-  private Point topLeft = new Point(0, 0);
-  private Point bottomRight;
-  private int cellSize;
-  private static final int DEFAULT_CELL_SIZE = 1000;
+  Point topLeft = new Point(0, 0);
+  Point bottomRight;
+  int cellSize;
+  static final int DEFAULT_CELL_SIZE = 1000;
 
   public GameField(final Point bottomRight, final int cellSize) {
     this.bottomRight = bottomRight;
